@@ -1,26 +1,23 @@
-import DeleteIcon from "@mui/icons-material/Delete";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import type { JSX } from "react";
-import type { ImageFile } from "../types";
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import type { JSX } from 'react';
+import type { ImageFile } from '../types';
 
 export type FileListProps = {
   files: ImageFile[];
   onDelete: (index: number) => void;
 };
 
-export default function FileList({
-  files,
-  onDelete,
-}: FileListProps): JSX.Element {
+export default function FileList({ files, onDelete }: FileListProps): JSX.Element {
   return (
     <List
       dense
       sx={{
         height: 300,
-        overflow: "auto",
-        border: "1px solid #ccc",
+        overflow: 'auto',
+        border: '1px solid #ccc',
         borderRadius: 1,
       }}
     >

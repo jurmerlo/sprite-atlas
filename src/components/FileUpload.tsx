@@ -6,6 +6,7 @@ import type { ImageFile } from '../types';
 
 export type FileUploadProps = {
   allowMultiple: boolean;
+  label: string;
   onFilesSelected: (files: ImageFile[]) => void;
 };
 
@@ -21,8 +22,6 @@ const VisuallyHiddenInput = styled('input')({
   whiteSpace: 'nowrap',
   width: 1,
 });
-
-
 
 function loadAllFiles(fileList: FileList | null): Promise<ImageFile[]> {
   const files: ImageFile[] = [];
@@ -61,15 +60,14 @@ function loadAllFiles(fileList: FileList | null): Promise<ImageFile[]> {
   return Promise.all(promises);
 }
 
-
-export default function FileUpload({ allowMultiple, onFilesSelected }: FileUploadProps): JSX.Element {
+export default function FileUpload({ allowMultiple, label, onFilesSelected }: FileUploadProps): JSX.Element {
   const filesSelected = (fileList: FileList | null): void => {
     loadAllFiles(fileList).then((files) => onFilesSelected(files));
   };
-  
+
   return (
     <Button component="label" role={'button'} variant="contained" tabIndex={-1} startIcon={<CloudUploadIcon />}>
-      Upload files
+      {label}
       <VisuallyHiddenInput
         type="file"
         accept="image/png"

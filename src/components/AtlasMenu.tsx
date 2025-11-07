@@ -80,15 +80,15 @@ export default function AtlasMenu({ updateImageSrc }: AtlasMenuProps): JSX.Eleme
         document.body.removeChild(link);
       }
     }, 500);
-  }
+  };
 
   return (
     <Stack spacing={2}>
-      <Stack direction='row' justifyContent='space-between' alignItems='center'>
-      <FileUpload allowMultiple={true} onFilesSelected={filesSelected} />
-      <Button variant="outlined" color="secondary" onClick={(): void => setFiles([])} disabled={files.length === 0}>
-        Clear
-      </Button>
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <FileUpload allowMultiple={true} onFilesSelected={filesSelected} label="Upload files" />
+        <Button variant="outlined" color="primary" onClick={(): void => setFiles([])} disabled={files.length === 0}>
+          Clear
+        </Button>
       </Stack>
       <FileList
         files={files}
@@ -162,13 +162,18 @@ export default function AtlasMenu({ updateImageSrc }: AtlasMenuProps): JSX.Eleme
         </ToggleButtonGroup>
       </Stack>
       <Stack direction="row" justifyContent="space-around" alignItems="center">
-      <Button variant="contained" color="primary" onClick={generate} size='small' disabled={files.length === 0 || atlasName.trim() === ''}>
-        Generate Atlas
-      </Button>
-      <Button variant="contained" color="primary" onClick={download} size='small' disabled={!atlas}>
-        Download
-      </Button>
-
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={generate}
+          size="small"
+          disabled={files.length === 0 || atlasName.trim() === ''}
+        >
+          Generate Atlas
+        </Button>
+        <Button variant="contained" color="primary" onClick={download} size="small" disabled={!atlas}>
+          Download
+        </Button>
       </Stack>
     </Stack>
   );

@@ -1,6 +1,7 @@
 import { PNG } from 'pngjs/browser';
 import type { Atlas } from './atlas';
 import type { Frame } from './frame';
+import type { Tileset } from './tileset';
 
 export function getAtlasImageUrl(atlas: Atlas): string | undefined {
   if (!atlas.packedImage) {
@@ -9,6 +10,14 @@ export function getAtlasImageUrl(atlas: Atlas): string | undefined {
 
   const buffer = PNG.sync.write(atlas.packedImage.pngData, { colorType: 6 });
   const blob = new Blob([new Uint8Array(buffer)], { type: 'image/png' });
+
+  return URL.createObjectURL(blob);
+}
+
+export function getTilesetImageUrl(tileset: Tileset): string {
+  const buffer = PNG.sync.write(tileset.image.pngData, { colorType: 6 });
+  const blob = new Blob([new Uint8Array(buffer)], { type: 'image/png' });
+
   return URL.createObjectURL(blob);
 }
 
