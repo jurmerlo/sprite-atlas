@@ -1,73 +1,38 @@
-# React + TypeScript + Vite
+# Sprite atlas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a web based sprite atlas packer and tileset extruder. You can use it at [https://jurmerlo.github.io/sprite-atlas](https://jurmerlo.github.io/sprite-atlas).  
 
-Currently, two official plugins are available:
+## Sprite atlas
+You can upload multiple png images and it will pack them into a single image of the smallest size possible. You can then download the image and a json file that has the position data for each individual image the atlas.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
+### Json data format
+```json
+{
+  "frames": [
+    {
+      "filename": "string",
+      "frame": {
+        "x": "number",
+        "y": "number",
+        "width": "number",
+        "height": "number"
       },
-      // other options...
-    },
-  },
-])
+      "trimmed": "boolean",
+      "sourceSize": {
+        "x": "number",
+        "y": "number",
+        "width": "number",
+        "height": "number"
+      }
+    }
+  ]
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The `name` is the name of the image without the extension.  
+The `frame` is the rectangle of the image inside the atlas.  
+`trimmed` is `true` when the transparent pixels are trimmed off the source image.  
+In the `sourceSize` the `x` and `y` store the offset of the transparent pixels that were removed from the top left. The `width` and `height` are the original `width` and `height` before trimming the transparent pixels.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Tileset extruder
+You can upload a tileset and extrude each tile inside the image. This can be useful when you have texture edge bleeding issues when rendering tiles.
