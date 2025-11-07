@@ -5,6 +5,7 @@ import { nodePolyfills } from 'vite-plugin-node-polyfills';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), nodePolyfills()],
+  base: '/sprite-atlas/',
   build: {
     outDir: 'docs',
     rollupOptions: {
