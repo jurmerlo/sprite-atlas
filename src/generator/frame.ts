@@ -24,13 +24,18 @@ export type Frame = {
     /**
      * The width of the frame in pixels.
      */
-    width: number;
+    w: number;
 
     /**
      * The height of the frame in pixels.
      */
-    height: number;
+    h: number;
   };
+
+  /**
+   * Always false in the current implementation.
+   */
+  rotated: boolean;
 
   /**
    * Indicates whether the transparent parts of the image have been trimmed off.
@@ -43,23 +48,38 @@ export type Frame = {
    */
   sourceSize: {
     /**
-     * The x offset of the trimmed sprite in pixels.
-     */
-    x: number;
-
-    /**
-     * The y offset of the trimmed sprite in pixels.
-     */
-    y: number;
-
-    /**
      * The width of the untrimmed sprite in pixels.
      */
-    width: number;
+    w: number;
 
     /**
      * The height of the untrimmed sprite in pixels.
      */
-    height: number;
+    h: number;
+  };
+
+  /**
+   * The position and size of the trimmed sprite within the original untrimmed image.
+   */
+  spriteSourceSize: {
+    /**
+     * The x position of the trimmed sprite in pixels.
+     */
+    x: number;
+
+    /**
+     * The y position of the trimmed sprite in pixels.
+     */
+    y: number;
+
+    /**
+     * The width of the trimmed sprite in pixels.
+     */
+    w: number;
+
+    /**
+     * The height of the trimmed sprite in pixels.
+     */
+    h: number;
   };
 };
